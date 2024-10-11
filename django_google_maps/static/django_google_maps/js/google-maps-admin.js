@@ -21,15 +21,19 @@ This script expects:
 
 */
 
+const geolocationId = 'id_geolocation';
+const addressId = 'id_address';
+
+async function initMap() {
+
+}
+
 function googleMapAdmin() {
 
     var autocomplete;
     var geocoder = new google.maps.Geocoder();
     var map;
     var marker;
-
-    var geolocationId = 'id_geolocation';
-    var addressId = 'id_address';
 
     var self = {
         initialize: function() {

@@ -1,2 +1,6 @@
 {% include "django/forms/widgets/text.html" %}
-<div class="map_canvas_wrapper"><div id="map_canvas"></div></div>
+<div class="map_canvas_wrapper">
+    <gmp-map center="{{ map_center }}" zoom="{{ zoom }}" map-id="{{ map_id }}" id="map_canvas">
+    <gmp-advanced-marker position="{{ marker_position }}" title="{{ widget.value }}"></gmp-advanced-marker>
+    </gmp-map>
+</div>
