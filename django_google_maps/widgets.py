@@ -13,7 +13,10 @@ class GoogleMapsAddressWidget(widgets.TextInput):
     class Media:
         css = {"all": ("django_google_maps/css/google-maps-admin.css",)}
         js = (
-            f"https://maps.googleapis.com/maps/api/js?key={settings.GOOGLE_MAPS_API_KEY}&libraries=maps,marker,places,geocoding",
+            (
+                f"https://maps.googleapis.com/maps/api/js"
+                f"?key={settings.GOOGLE_MAPS_API_KEY}&libraries=maps,marker,places,geocoding"
+            ),
             "django_google_maps/js/google-maps-admin.js",
         )
 
