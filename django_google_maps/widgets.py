@@ -14,6 +14,7 @@ class GoogleMapsAddressWidget(widgets.TextInput):
             'all': ('django_google_maps/css/google-maps-admin.css', )
         }
         js = (
+            f'https://maps.googleapis.com/maps/api/js?key={settings.GOOGLE_MAPS_API_KEY}&libraries=maps,marker,places,geocoding',
             'django_google_maps/js/google-maps-admin.js',
         )
 
