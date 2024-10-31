@@ -55,7 +55,12 @@ async function initialize() {
         center: latlng,
         mapTypeId: getMapType()
     };
-    map = new Map(document.getElementById("map_canvas"), myOptions);
+    let mapHost = document.getElementById("map_canvas");
+    if (mapHost.hasAttribute("mapid")) {
+        myOptions.mapId = mapHost.getAttribute("mapid")
+    }
+
+    map = new Map(mapHost, myOptions);
     if (existinglocation) {
         setMarker(latlng);
     }
@@ -146,22 +151,23 @@ function setMarker(latlng) {
     }
 }
 
-function addMarker(Options) {
-    marker = new google.maps.Marker({
+async function addMarker(Options) {
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    let draggable = Options.draggable || false;
+    marker = new AdvancedMarkerElement({
         map: map,
-        position: Options.latlng
+        position: Options.latlng,
+        gmpDraggable: draggable,
     });
 
-    let draggable = Options.draggable || false;
     if (draggable) {
         addMarkerDrag();
     }
 }
 
 function addMarkerDrag() {
-    marker.setDraggable(true);
-    google.maps.event.addListener(marker, 'dragend', function (new_location) {
-        updateGeolocation(new_location.latLng);
+    marker.addListener('dragend', (event) => {
+        updateGeolocation(event.latLng);
     });
 }
 

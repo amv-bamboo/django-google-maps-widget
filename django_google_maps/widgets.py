@@ -23,7 +23,6 @@ class GoogleMapsAddressWidget(widgets.TextInput):
     def get_context(self, name, value, attrs) -> dict[str, Any]:
         context = super().get_context(name, value, attrs)
 
-        context["api_key"] = settings.GOOGLE_MAPS_API_KEY
         context["map_id"] = settings.GOOGLE_MAPS_MAP_ID
 
         return context
