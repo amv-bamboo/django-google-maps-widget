@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from sample.models import SampleModel
 from django_google_maps.widgets import GoogleMapsAddressWidget
 
@@ -9,5 +10,7 @@ class SampleForm(forms.ModelForm):
         model = SampleModel
         fields = ['address', 'geolocation']
         widgets = {
-            "address": GoogleMapsAddressWidget,
+            "address": GoogleMapsAddressWidget(attrs={
+                "mapid": settings.GOOGLE_MAPS_MAP_ID
+            }),
         }

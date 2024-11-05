@@ -1,4 +1,3 @@
-from typing import Any
 from django import forms
 from django.conf import settings
 from django.forms import widgets
@@ -19,13 +18,6 @@ class GoogleMapsAddressWidget(widgets.TextInput):
             ),
             "django_google_maps/js/google-maps-admin.js",
         )
-
-    def get_context(self, name, value, attrs) -> dict[str, Any]:
-        context = super().get_context(name, value, attrs)
-
-        context["map_id"] = settings.GOOGLE_MAPS_MAP_ID
-
-        return context
 
 
 def render_js(cls):

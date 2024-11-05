@@ -29,6 +29,7 @@ let marker;
 
 const geolocationId = 'id_geolocation';
 const addressId = 'id_address';
+const mapHostId = 'map_canvas';
 
 async function initialize() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -55,9 +56,11 @@ async function initialize() {
         center: latlng,
         mapTypeId: getMapType()
     };
-    let mapHost = document.getElementById("map_canvas");
-    if (mapHost.hasAttribute("mapid")) {
-        myOptions.mapId = mapHost.getAttribute("mapid")
+    const addressField = document.getElementById(addressId);
+    const mapHost = document.getElementById(mapHostId);
+
+    if (addressField.hasAttribute("mapid")) {
+        myOptions.mapId = addressField.getAttribute("mapid")
     }
 
     map = new Map(mapHost, myOptions);
@@ -65,7 +68,6 @@ async function initialize() {
         setMarker(latlng);
     }
 
-    const addressField = document.getElementById(addressId);
 
     autocomplete = new Autocomplete(
                 /** @type {!HTMLInputElement} */(addressField),
