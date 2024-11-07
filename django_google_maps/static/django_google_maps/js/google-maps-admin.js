@@ -21,159 +21,167 @@ This script expects:
 
 */
 
-function googleMapAdmin() {
 
-    var autocomplete;
-    var geocoder = new google.maps.Geocoder();
-    var map;
-    var marker;
+let autocomplete;
+let geocoder;
+let map;
+let marker;
 
-    var geolocationId = 'id_geolocation';
-    var addressId = 'id_address';
+const geolocationId = 'id_geolocation';
+const addressId = 'id_address';
+const mapHostId = 'map_canvas';
 
-    var self = {
-        initialize: function() {
-            var lat = 0;
-            var lng = 0;
-            var zoom = 2;
-            // set up initial map to be world view. also, add change
-            // event so changing address will update the map
-            var existinglocation = self.getExistingLocation();
+async function initialize() {
+    const { Map } = await google.maps.importLibrary("maps");
+    const { Autocomplete } = await google.maps.importLibrary("places");
+    const { Geocoder } = await google.maps.importLibrary("geocoding");
+    geocoder = new Geocoder();
 
-            if (existinglocation) {
-                lat = existinglocation[0];
-                lng = existinglocation[1];
-                zoom = 18;
-            }
+    let lat = 0;
+    let lng = 0;
+    let zoom = 2;
+    // set up initial map to be world view. also, add change
+    // event so changing address will update the map
+    let existinglocation = getExistingLocation();
 
-            var latlng = new google.maps.LatLng(lat,lng);
-            var myOptions = {
-              zoom: zoom,
-              center: latlng,
-              mapTypeId: self.getMapType()
-            };
-            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-            if (existinglocation) {
-                self.setMarker(latlng);
-            }
+    if (existinglocation) {
+        lat = existinglocation[0];
+        lng = existinglocation[1];
+        zoom = 18;
+    }
 
-            autocomplete = new google.maps.places.Autocomplete(
-                /** @type {!HTMLInputElement} */(document.getElementById(addressId)),
-                self.getAutoCompleteOptions());
-
-            // this only triggers on enter, or if a suggested location is chosen
-            // todo: if a user doesn't choose a suggestion and presses tab, the map doesn't update
-            autocomplete.addListener("place_changed", self.codeAddress);
-
-            // don't make enter submit the form, let it just trigger the place_changed event
-            // which triggers the map update & geocode
-            $("#" + addressId).keydown(function (e) {
-                if (e.keyCode == 13) {  // enter key
-                    e.preventDefault();
-                    return false;
-                }
-            });
-        },
-
-        getMapType : function() {
-            // https://developers.google.com/maps/documentation/javascript/maptypes
-            var geolocation = document.getElementById(addressId);
-            var allowedType = ['roadmap', 'satellite', 'hybrid', 'terrain'];
-            var mapType = geolocation.getAttribute('data-map-type');
-
-            if (mapType && -1 !== allowedType.indexOf(mapType)) {
-                return mapType;
-            }
-
-            return google.maps.MapTypeId.HYBRID;
-        },
-
-        getAutoCompleteOptions : function() {
-            var geolocation = document.getElementById(addressId);
-            var autocompleteOptions = geolocation.getAttribute('data-autocomplete-options');
-
-            if (!autocompleteOptions) {
-                return {
-                   types: ['geocode']
-                };
-            }
-
-            return JSON.parse(autocompleteOptions);
-        },
-
-        getExistingLocation: function() {
-            var geolocation = document.getElementById(geolocationId).value;
-            if (geolocation) {
-                return geolocation.split(',');
-            }
-        },
-
-        codeAddress: function() {
-            var place = autocomplete.getPlace();
-
-            if(place.geometry !== undefined) {
-                self.updateWithCoordinates(place.geometry.location);
-            }
-            else {
-                geocoder.geocode({'address': place.name}, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        var latlng = results[0].geometry.location;
-                        self.updateWithCoordinates(latlng);
-                    } else {
-                        alert("Geocode was not successful for the following reason: " + status);
-                    }
-                });
-            }
-        },
-
-        updateWithCoordinates: function(latlng) {
-            map.setCenter(latlng);
-            map.setZoom(18);
-            self.setMarker(latlng);
-            self.updateGeolocation(latlng);
-        },
-
-        setMarker: function(latlng) {
-            if (marker) {
-                self.updateMarker(latlng);
-            } else {
-                self.addMarker({'latlng': latlng, 'draggable': true});
-            }
-        },
-
-        addMarker: function(Options) {
-            marker = new google.maps.Marker({
-                map: map,
-                position: Options.latlng
-            });
-
-            var draggable = Options.draggable || false;
-            if (draggable) {
-                self.addMarkerDrag(marker);
-            }
-        },
-
-        addMarkerDrag: function() {
-            marker.setDraggable(true);
-            google.maps.event.addListener(marker, 'dragend', function(new_location) {
-                self.updateGeolocation(new_location.latLng);
-            });
-        },
-
-        updateMarker: function(latlng) {
-            marker.setPosition(latlng);
-        },
-
-        updateGeolocation: function(latlng) {
-            document.getElementById(geolocationId).value = latlng.lat() + "," + latlng.lng();
-            $("#" + geolocationId).trigger('change');
-        }
+    let latlng = new google.maps.LatLng(lat, lng);
+    let myOptions = {
+        zoom: zoom,
+        center: latlng,
+        mapTypeId: getMapType()
     };
+    const addressField = document.getElementById(addressId);
+    const mapHost = document.getElementById(mapHostId);
 
-    return self;
+    if (addressField.hasAttribute("mapid")) {
+        myOptions.mapId = addressField.getAttribute("mapid")
+    }
+
+    map = new Map(mapHost, myOptions);
+    if (existinglocation) {
+        setMarker(latlng);
+    }
+
+
+    autocomplete = new Autocomplete(
+                /** @type {!HTMLInputElement} */(addressField),
+        getAutoCompleteOptions());
+
+    // this only triggers on enter, or if a suggested location is chosen
+    // todo: if a user doesn't choose a suggestion and presses tab, the map doesn't update
+    autocomplete.addListener("place_changed", codeAddress);
+
+    // don't make enter submit the form, let it just trigger the place_changed event
+    // which triggers the map update & geocode
+    addressField.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            return false;
+        }
+    });
 }
 
-$(document).ready(function() {
-    var googlemap = googleMapAdmin();
-    googlemap.initialize();
-});
+function getMapType() {
+    // https://developers.google.com/maps/documentation/javascript/maptypes
+    const geolocation = document.getElementById(addressId);
+    const allowedType = ['roadmap', 'satellite', 'hybrid', 'terrain'];
+    const mapType = geolocation.getAttribute('data-map-type');
+
+    if (mapType && -1 !== allowedType.indexOf(mapType)) {
+        return mapType;
+    }
+
+    return google.maps.MapTypeId.HYBRID;
+}
+
+function getAutoCompleteOptions() {
+    const geolocation = document.getElementById(addressId);
+    const autocompleteOptions = geolocation.getAttribute('data-autocomplete-options');
+
+    if (!autocompleteOptions) {
+        return {
+            types: ['geocode']
+        };
+    }
+
+    return JSON.parse(autocompleteOptions);
+}
+
+function getExistingLocation() {
+    let geolocation = document.getElementById(geolocationId).value;
+    if (geolocation) {
+        return geolocation.split(',');
+    }
+}
+
+function codeAddress() {
+    let place = autocomplete.getPlace();
+
+    if (place.geometry !== undefined) {
+        updateWithCoordinates(place.geometry.location);
+    }
+    else {
+        geocoder.geocode({ 'address': place.name }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var latlng = results[0].geometry.location;
+                self.updateWithCoordinates(latlng);
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
+    }
+}
+
+function updateWithCoordinates(latlng) {
+    map.setCenter(latlng);
+    map.setZoom(18);
+    setMarker(latlng);
+    updateGeolocation(latlng);
+}
+
+function setMarker(latlng) {
+    if (marker) {
+        updateMarker(latlng);
+    } else {
+        addMarker({ 'latlng': latlng, 'draggable': true });
+    }
+}
+
+async function addMarker(Options) {
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    let draggable = Options.draggable || false;
+    marker = new AdvancedMarkerElement({
+        map: map,
+        position: Options.latlng,
+        gmpDraggable: draggable,
+    });
+
+    if (draggable) {
+        addMarkerDrag();
+    }
+}
+
+function addMarkerDrag() {
+    marker.addListener('dragend', (event) => {
+        updateGeolocation(event.latLng);
+    });
+}
+
+function updateMarker(latlng) {
+    marker.setPosition(latlng);
+}
+
+function updateGeolocation(latlng) {
+    const geolocationField = document.getElementById(geolocationId);
+    geolocationField.value = latlng.lat() + "," + latlng.lng();
+    const event = new Event('change');
+    geolocationField.dispatchEvent(event);
+}
+
+initialize();
