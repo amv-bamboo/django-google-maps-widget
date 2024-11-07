@@ -1,0 +1,47 @@
+[project]
+name = "django-google-maps"
+version = "0.14.0"
+authors = [
+  { name="Aaron Madison", email="aaron.l.madison@gmail.com" },
+]
+description = "Plugs Google Maps Platform API into Django admin."
+readme = "README.rst"
+requires-python = ">=3.9"
+dependencies = [
+    "Django>=4.2"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+license = {file = "LICENSE"}
+
+[project.urls]
+Homepage = "https://github.com/madisona/django-google-maps"
+Issues = "https://github.com/madisona/django-google-maps/issues"
+
+[project.optional-dependencies]
+test = [
+    "flake8",
+    "coverage",
+    "mock",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
