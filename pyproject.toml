@@ -42,6 +42,17 @@ dependencies = [
     "mock",
 ]
 
+[[tool.hatch.envs.test.matrix]]
+python = ["3.11", "3.12", "3.13"]
+django = ["4.2.16", "5.0.9", "5.1.2"]
+
+[tool.hatch.envs.test.overrides]
+matrix.django.dependencies = [
+    { value = "Django==4.2.16", if = ["4.2.16"] },
+    { value = "Django==5.0.9", if = ["5.0.9"] },
+    { value = "Django==5.1.2", if = ["5.1.2"] }
+]
+
 [tool.hatch.envs.test.scripts]
 test = "python manage.py test"
 lint = "flake8 django_google_maps --max-line-length=120 --max-complexity=4"
