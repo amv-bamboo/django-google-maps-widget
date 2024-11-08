@@ -10,15 +10,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: ['3.11', '3.12', '3.13']
-        django-version: ['4.2.16', '5.0.9', '5.1.2']
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
@@ -29,5 +24,5 @@ jobs:
           pip install hatch
       - name: Run Tests
         run: |
-          hatch run test.py${{ matrix.python-version }}-${{ matrix.django-version }}:cov
-          hatch run test.py${{ matrix.python-version }}-${{ matrix.django-version }}:lint
+          hatch run test:cov
+          hatch run test:lint
