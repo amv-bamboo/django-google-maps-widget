@@ -35,12 +35,19 @@ license = {file = "LICENSE"}
 Homepage = "https://github.com/madisona/django-google-maps"
 Issues = "https://github.com/madisona/django-google-maps/issues"
 
-[project.optional-dependencies]
-test = [
+[tool.hatch.envs.test]
+dependencies = [
     "flake8",
     "coverage",
     "mock",
 ]
+
+[tool.hatch.envs.test.scripts]
+test = "python manage.py test"
+lint = "flake8 django_google_maps --max-line-length=120 --max-complexity=4"
+test-cov = "coverage run --source=django_google_maps manage.py test"
+cov-report = "coverage report --show-missing"
+cov = ["test-cov", "cov-report"]
 
 [build-system]
 requires = ["hatchling"]
