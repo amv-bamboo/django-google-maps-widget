@@ -21,15 +21,13 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.13"
           cache: pip
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements/test.txt
-          pip install --force-reinstall -v "Django==${{ matrix.django-version }}"
+          pip install hatch
       - name: Run Tests
         run: |
-          coverage run --source=django_google_maps manage.py test
-          coverage report --show-missing
-          flake8 django_google_maps --max-line-length=120 --max-complexity=4
+          hatch run test.py${{ matrix.python-version }}-${{ matrix.django-version }}:cov
+          hatch run test.py${{ matrix.python-version }}-${{ matrix.django-version }}:lint
