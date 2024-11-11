@@ -9,9 +9,9 @@ version 4.2+.
 Starting with ``django-google-maps`` version (0.7.0), Django 1.11+ is
 required because Django changed their widget template rendering system.
 Version 0.8.0 supports Django 2.0+, and as such removes support for
-Python 2.7
+Python 2.7. Version 0.14.0 drops support for Python 3.8 and lower and Django 4.1 and lower.
 
-I’m using this to allow someone from the admin panels to type a freeform
+I'm using this to allow someone from the admin panels to type a freeform
 address, have the address geocoded on change and plotted on the map. If
 the location is not 100% correct, the user can drag the marker to the
 correct spot and the geo coordinates will update.
@@ -24,12 +24,17 @@ Status
 USAGE:
 ------
 
--  include the ``django_google_maps`` app in your ``settings.py``
+-  Include the ``django_google_maps`` app in your ``settings.py``
 
 -  Add your Google Maps API Key in your ``settings.py`` as
    ``GOOGLE_MAPS_API_KEY``
 
--  create a model that has both an address field and geolocation field
+-  Add your Google Maps map ID in your ``settings.py`` as
+   ``GOOGLE_MAPS_MAP_ID`` (recommended). Map ID is necessary for the map
+   to function and is injected via field attribute, but you can provide
+   this attribute however you want.
+
+-  Create a model that has both an address field and geolocation field
 
    .. code:: python
 
@@ -40,7 +45,7 @@ USAGE:
           address = map_fields.AddressField(max_length=200)
           geolocation = map_fields.GeoLocationField(max_length=100)
 
--  in the ``admin.py`` include the following as a formfield_override
+-  In the ``admin.py``, include the following as a ``formfield_override``:
 
    .. code:: python
 
@@ -50,7 +55,7 @@ USAGE:
 
       class RentalAdmin(admin.ModelAdmin):
           formfield_overrides = {
-              map_fields.AddressField: {'widget': map_widgets.GoogleMapsAddressWidget},
+              map_fields.AddressField: {"widget": map_widgets.GoogleMapsAddressWidget(attrs={"mapid": settings.GOOGLE_MAPS_MAP_ID})},
           }
 
 -  To change the map type (``hybrid`` by default), you can add an html
@@ -66,7 +71,7 @@ USAGE:
       class RentalAdmin(admin.ModelAdmin):
           formfield_overrides = {
               map_fields.AddressField: {
-                'widget': map_widgets.GoogleMapsAddressWidget(attrs={'data-map-type': 'roadmap'})},
+                "widget": map_widgets.GoogleMapsAddressWidget(attrs={"data-map-type": "roadmap"})},
           }
 
 -  To change the autocomplete options, you can add an html attribute on
@@ -81,11 +86,11 @@ USAGE:
       from django_google_maps import fields as map_fields
 
       class RentalAdmin(admin.ModelAdmin): formfield_overrides = {
-          map_fields.AddressField: { ‘widget’:
+          map_fields.AddressField: { "widget":
           map_widgets.GoogleMapsAddressWidget(attrs={
-            ‘data-autocomplete-options’: json.dumps({ ‘types’: [‘geocode’,
-            ‘establishment’], ‘componentRestrictions’: {
-                        'country': 'us'
+            "data-autocomplete-options": json.dumps({ "types": ["geocode",
+            "establishment"], "componentRestrictions": {
+                        "country": "us"
                     }
                 })
             })
@@ -105,5 +110,5 @@ I get around to it I'll see if I can create a method that will build that
 into the model.
 
 .. |Build Status| image:: https://github.com/madisona/django-google-maps/actions/workflows/django.yml/badge.svg
-   :target: https://github.com/amv-bamboo/django-google-maps/actions/workflows/django.yml
+   :target: https://github.com/madisona/django-google-maps/actions/workflows/django.yml
 .. _Google Maps Platform: https://developers.google.com/maps/documentation/javascript/overview
