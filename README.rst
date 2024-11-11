@@ -55,7 +55,9 @@ USAGE:
 
       class RentalAdmin(admin.ModelAdmin):
           formfield_overrides = {
-              map_fields.AddressField: {"widget": map_widgets.GoogleMapsAddressWidget(attrs={"mapid": settings.GOOGLE_MAPS_MAP_ID})},
+              map_fields.AddressField: {
+              "widget": map_widgets.GoogleMapsAddressWidget(attrs={"mapid": settings.GOOGLE_MAPS_MAP_ID})
+            },
           }
 
 -  To change the map type (``hybrid`` by default), you can add an html
