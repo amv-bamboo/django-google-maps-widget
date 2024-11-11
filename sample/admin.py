@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.forms.widgets import TextInput
 
@@ -9,14 +10,8 @@ from sample import models
 
 class SampleModelAdmin(admin.ModelAdmin):
     formfield_overrides = {
-        AddressField: {
-            'widget': GoogleMapsAddressWidget
-        },
-        GeoLocationField: {
-            'widget': TextInput(attrs={
-                'readonly': 'readonly'
-            })
-        },
+        AddressField: {"widget": GoogleMapsAddressWidget(attrs={"mapid": settings.GOOGLE_MAPS_MAP_ID})},
+        GeoLocationField: {"widget": TextInput(attrs={"readonly": "readonly"})},
     }
 
 

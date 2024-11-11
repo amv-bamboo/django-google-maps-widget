@@ -21,10 +21,7 @@ class GoogleMapsAddressWidget(widgets.TextInput):
 
 
 def render_js(cls):
-    return [
-        format_html('<script src="{}" defer></script>', cls.absolute_path(path))
-        for path in cls._js
-    ]
+    return [format_html('<script src="{}" defer></script>', cls.absolute_path(path)) for path in cls._js]
 
 
 forms.widgets.Media.render_js = render_js

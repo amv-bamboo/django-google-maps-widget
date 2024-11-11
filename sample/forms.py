@@ -5,12 +5,9 @@ from django_google_maps.widgets import GoogleMapsAddressWidget
 
 
 class SampleForm(forms.ModelForm):
-
     class Meta(object):
         model = SampleModel
-        fields = ['address', 'geolocation']
+        fields = ["address", "geolocation"]
         widgets = {
-            "address": GoogleMapsAddressWidget(attrs={
-                "mapid": settings.GOOGLE_MAPS_MAP_ID
-            }),
+            "address": GoogleMapsAddressWidget(attrs={"mapid": settings.GOOGLE_MAPS_MAP_ID}),
         }
