@@ -1,6 +1,10 @@
+==================
+django-google-maps
+==================
+
 ``django-google-maps`` is a simple application that provides the basic
-hooks into google maps V3 api for use in Django models from Django
-version 1.11+.
+hooks into `Google Maps Platform`_ for use in Django models from Django
+version 4.2+.
 
 Starting with ``django-google-maps`` version (0.7.0), Django 1.11+ is
 required because Django changed their widget template rendering system.
@@ -102,3 +106,4 @@ into the model.
 
 .. |Build Status| image:: https://travis-ci.org/madisona/django-google-maps.png
    :target: https://travis-ci.org/madisona/django-google-maps
+.. _Google Maps Platform: https://developers.google.com/maps/documentation/javascript/overview
