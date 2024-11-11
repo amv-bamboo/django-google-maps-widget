@@ -104,6 +104,6 @@ using the geocoordinates that were saved in your model. Maybe sometime when
 I get around to it I'll see if I can create a method that will build that
 into the model.
 
-.. |Build Status| image:: https://travis-ci.org/madisona/django-google-maps.png
-   :target: https://travis-ci.org/madisona/django-google-maps
+.. |Build Status| image:: https://github.com/madisona/django-google-maps/actions/workflows/django.yml/badge.svg
+   :target: https://github.com/amv-bamboo/django-google-maps/actions/workflows/django.yml
 .. _Google Maps Platform: https://developers.google.com/maps/documentation/javascript/overview
