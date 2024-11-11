@@ -37,7 +37,7 @@ Issues = "https://github.com/madisona/django-google-maps/issues"
 
 [tool.hatch.envs.test]
 dependencies = [
-    "flake8",
+    "ruff",
     "coverage",
     "mock",
 ]
@@ -55,10 +55,19 @@ matrix.django.dependencies = [
 
 [tool.hatch.envs.test.scripts]
 test = "python manage.py test"
-lint = "flake8 django_google_maps --max-line-length=120 --max-complexity=4"
+lint = "ruff check"
 test-cov = "coverage run --source=django_google_maps manage.py test"
 cov-report = "coverage report --show-missing"
 cov = ["test-cov", "cov-report"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "C901", "W"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 4
 
 [build-system]
 requires = ["hatchling"]
