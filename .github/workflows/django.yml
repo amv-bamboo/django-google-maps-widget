@@ -74,4 +74,4 @@ jobs:
           pip install hatch
       - name: Run Tests
         run: |
-          hatch run -p test.py3.13-5.1.2:cov
+          hatch run test.py3.13-5.1.2:cov
