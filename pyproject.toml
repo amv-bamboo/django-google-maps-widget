@@ -60,7 +60,7 @@ matrix.django.dependencies = [
 [tool.hatch.envs.test.scripts]
 test = "python manage.py test"
 lint = "ruff check"
-test-cov = "coverage run --source=django_google_maps manage.py test"
+test-cov = "coverage run --source=django_google_maps_widget manage.py test"
 cov-report = "coverage report --show-missing"
 cov = ["test-cov", "cov-report"]
 
