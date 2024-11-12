@@ -7,16 +7,16 @@ from django.utils.html import format_html
 class GoogleMapsAddressWidget(widgets.TextInput):
     """a widget that will place a google map right after the #id_address field"""
 
-    template_name = "django_google_maps/widgets/map_widget.html"
+    template_name = "django_google_maps_widget/widgets/map_widget.html"
 
     class Media:
-        css = {"all": ("django_google_maps/css/google-maps-admin.css",)}
+        css = {"all": ("django_google_maps_widget/css/google-maps-admin.css",)}
         js = (
             (
                 f"https://maps.googleapis.com/maps/api/js"
                 f"?key={settings.GOOGLE_MAPS_API_KEY}&libraries=maps,marker,places,geocoding"
             ),
-            "django_google_maps/js/google-maps-admin.js",
+            "django_google_maps_widget/js/google-maps-admin.js",
         )
 
 

@@ -121,9 +121,9 @@ INSTALLED_APPS = (
     "django.contrib.admin",
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    "django_google_maps",
+    "django_google_maps_widget",
     "sample",
-    "django_google_maps.tests.test_app",
+    "django_google_maps_widget.tests.test_app",
 )
 
 # A sample logging configuration. The only tangible logging

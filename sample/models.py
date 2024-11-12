@@ -1,6 +1,6 @@
 from django.db import models
 
-from django_google_maps.fields import AddressField, GeoLocationField
+from django_google_maps_widget.fields import AddressField, GeoLocationField
 
 
 class SampleModel(models.Model):

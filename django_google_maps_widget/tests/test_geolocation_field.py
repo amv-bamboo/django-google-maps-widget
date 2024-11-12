@@ -1,6 +1,6 @@
 from django import test
-from django_google_maps.tests.test_app import models
-from django_google_maps.fields import GeoPt
+from django_google_maps_widget.tests.test_app import models
+from django_google_maps_widget.fields import GeoPt
 
 
 class GeoLocationFieldTests(test.TestCase):

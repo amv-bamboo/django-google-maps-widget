@@ -1,5 +1,5 @@
 from django import test
-from django_google_maps.fields import typename
+from django_google_maps_widget.fields import typename
 
 
 class TypeNameTests(test.TestCase):
