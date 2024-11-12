@@ -1,8 +1,12 @@
 [project]
-name = "django-google-maps"
-version = "0.14.0"
+name = "django-google-maps-widget"
+version = "1.0.0"
 authors = [
   { name="Aaron Madison", email="aaron.l.madison@gmail.com" },
+  { name="Andrei Mukamolau", email="amv@bamboogroup.eu" },
+]
+maintainers = [
+  { name="Andrei Mukamolau", email="amv@bamboogroup.eu" },
 ]
 description = "Plugs Google Maps Platform API into Django admin."
 readme = "README.rst"
@@ -11,7 +15,7 @@ dependencies = [
     "Django>=4.2"
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Web Environment",
     "Framework :: Django",
     "Framework :: Django :: 4.2",

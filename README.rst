@@ -2,26 +2,18 @@
 django-google-maps
 ==================
 
+|Build Status|
+
 ``django-google-maps`` is a simple application that provides the basic
 hooks into `Google Maps Platform`_ for use in Django models from Django
-version 4.2+.
+version 4.2+. Supports Python 3.9+. Forked from `this project`_ originally authored by `@madisona`_, with adaptation to the modern Python environment.
 
-Starting with ``django-google-maps`` version (0.7.0), Django 1.11+ is
-required because Django changed their widget template rendering system.
-Version 0.8.0 supports Django 2.0+, and as such removes support for
-Python 2.7. Version 0.14.0 drops support for Python 3.8 and lower and Django 4.1 and lower.
-
-I'm using this to allow someone from the admin panels to type a freeform
+This library is useful to allow someone from the admin panels to type a freeform
 address, have the address geocoded on change and plotted on the map. If
 the location is not 100% correct, the user can drag the marker to the
 correct spot and the geo coordinates will update.
 
-Status
-~~~~~~
-
-|Build Status|
-
-USAGE:
+Usage
 ------
 
 -  Include the ``django_google_maps`` app in your ``settings.py``
@@ -34,7 +26,7 @@ USAGE:
    to function and is injected via field attribute, but you can provide
    this attribute however you want.
 
--  Create a model that has both an address field and geolocation field
+-  Create a model that has both an address field and geolocation field:
 
    .. code:: python
 
@@ -103,16 +95,16 @@ USAGE:
 
 That should be all you need to get started.
 
-I also like to make the geolocation field readonly in the admin so a user
-(myself) doesn't accidentally change it to a nonsensical value. There is
-validation on the field so you can't enter an incorrect value, but you could
+It can be useful to make the geolocation field readonly in the admin so a user
+doesn't accidentally change it to a nonsensical value. There is
+validation on the field, so you can't enter an incorrect value, but you could
 enter something that is not even close to the address you intended.
 
 When you're displaying the address back to the user, just request the map
-using the geocoordinates that were saved in your model. Maybe sometime when
-I get around to it I'll see if I can create a method that will build that
-into the model.
+using the geocoordinates that were saved in your model.
 
-.. |Build Status| image:: https://github.com/madisona/django-google-maps/actions/workflows/django.yml/badge.svg
-   :target: https://github.com/madisona/django-google-maps/actions/workflows/django.yml
+.. |Build Status| image:: https://github.com/amv-bamboo/django-google-maps/actions/workflows/django.yml/badge.svg
+   :target: https://github.com/amv-bamboo/django-google-maps/actions/workflows/django.yml
 .. _Google Maps Platform: https://developers.google.com/maps/documentation/javascript/overview
+.. _this project: https://github.com/madisona/django-google-maps/
+.. _@madisona: https://github.com/madisona/
