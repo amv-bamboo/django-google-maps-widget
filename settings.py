@@ -89,6 +89,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.request",
                 "django.contrib.messages.context_processors.messages",
             ]
         },
@@ -143,6 +144,8 @@ LOGGING = {
         },
     },
 }
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 GOOGLE_MAPS_API_KEY = "SAMPLE_KEY"
