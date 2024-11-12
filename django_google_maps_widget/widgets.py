@@ -1,7 +1,13 @@
-from django import forms
 from django.conf import settings
+from django.templatetags.static import static
 from django.forms import widgets
-from django.utils.html import format_html
+from django.utils.html import html_safe
+
+
+@html_safe
+class MapsAdminScript:
+    def __str__(self) -> str:
+        return f'<script src="{static("django_google_maps_widget/js/google-maps-admin.js")}" type="module"></script>'
 
 
 class GoogleMapsAddressWidget(widgets.TextInput):
@@ -16,12 +22,5 @@ class GoogleMapsAddressWidget(widgets.TextInput):
                 f"https://maps.googleapis.com/maps/api/js"
                 f"?key={settings.GOOGLE_MAPS_API_KEY}&libraries=maps,marker,places,geocoding"
             ),
-            "django_google_maps_widget/js/google-maps-admin.js",
+            MapsAdminScript(),
         )
-
-
-def render_js(cls):
-    return [format_html('<script src="{}" defer></script>', cls.absolute_path(path)) for path in cls._js]
-
-
-forms.widgets.Media.render_js = render_js
