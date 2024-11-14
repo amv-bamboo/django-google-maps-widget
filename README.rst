@@ -1,10 +1,10 @@
 ==================
-django-google-maps
+django-google-maps-widget
 ==================
 
 |Build Status|
 
-``django-google-maps`` is a simple application that provides the basic
+``django-google-maps-widget`` is a simple library that provides the basic
 hooks into `Google Maps Platform`_ for use in Django models from Django
 version 4.2+. Supports Python 3.9+. Forked from `this project`_ originally authored by `@madisona`_, with adaptation to the modern Python environment.
 
