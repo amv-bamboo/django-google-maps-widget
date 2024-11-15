@@ -36,8 +36,8 @@ classifiers = [
 license = {file = "LICENSE"}
 
 [project.urls]
-Homepage = "https://github.com/madisona/django-google-maps"
-Issues = "https://github.com/madisona/django-google-maps/issues"
+Homepage = "https://github.com/amv-bamboo/django-google-maps-widget"
+Issues = "https://github.com/amv-bamboo/django-google-maps-widget/issues"
 
 [tool.hatch.envs.test]
 dependencies = [
