@@ -16,7 +16,7 @@ correct spot and the geo coordinates will update.
 Usage
 ------
 
--  Include the ``django_google_maps`` app in your ``settings.py``
+-  Include the ``django_google_maps_widget`` app in your ``settings.py``
 
 -  Add your Google Maps API Key in your ``settings.py`` as
    ``GOOGLE_MAPS_API_KEY``
@@ -31,7 +31,7 @@ Usage
    .. code:: python
 
       from django.db import models
-      from django_google_maps import fields as map_fields
+      from django_google_maps_widget import fields as map_fields
 
       class Rental(models.Model):
           address = map_fields.AddressField(max_length=200)
@@ -42,8 +42,8 @@ Usage
    .. code:: python
 
       from django.contrib import admin
-      from django_google_maps import widgets as map_widgets
-      from django_google_maps import fields as map_fields
+      from django_google_maps_widget import widgets as map_widgets
+      from django_google_maps_widget import fields as map_fields
 
       class RentalAdmin(admin.ModelAdmin):
           formfield_overrides = {
@@ -61,8 +61,8 @@ Usage
    .. code:: python
 
       from django.contrib import admin
-      from django_google_maps import widgets as map_widgets
-      from django_google_maps import fields as map_fields
+      from django_google_maps_widget import widgets as map_widgets
+      from django_google_maps_widget import fields as map_fields
 
       class RentalAdmin(admin.ModelAdmin):
           formfield_overrides = {
@@ -78,8 +78,8 @@ Usage
    .. code:: python
 
       import json from django.contrib import admin
-      from django_google_maps import widgets as map_widgets
-      from django_google_maps import fields as map_fields
+      from django_google_maps_widget import widgets as map_widgets
+      from django_google_maps_widget import fields as map_fields
 
       class RentalAdmin(admin.ModelAdmin): formfield_overrides = {
           map_fields.AddressField: { "widget":
