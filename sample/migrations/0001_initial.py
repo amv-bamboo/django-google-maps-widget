@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django_google_maps.fields
+import django_google_maps_widget.fields
 
 
 class Migration(migrations.Migration):
@@ -13,8 +13,8 @@ class Migration(migrations.Migration):
             name="SampleModel",
             fields=[
                 ("id", models.AutoField(verbose_name="ID", serialize=False, auto_created=True, primary_key=True)),
-                ("address", django_google_maps.fields.AddressField(max_length=100)),
-                ("geolocation", django_google_maps.fields.GeoLocationField(max_length=100, blank=True)),
+                ("address", django_google_maps_widget.fields.AddressField(max_length=100)),
+                ("geolocation", django_google_maps_widget.fields.GeoLocationField(max_length=100, blank=True)),
             ],
             options={},
             bases=(models.Model,),

@@ -89,6 +89,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.request",
                 "django.contrib.messages.context_processors.messages",
             ]
         },
@@ -121,9 +122,9 @@ INSTALLED_APPS = (
     "django.contrib.admin",
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    "django_google_maps",
+    "django_google_maps_widget",
     "sample",
-    "django_google_maps.tests.test_app",
+    "django_google_maps_widget.tests.test_app",
 )
 
 # A sample logging configuration. The only tangible logging
@@ -143,6 +144,8 @@ LOGGING = {
         },
     },
 }
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 GOOGLE_MAPS_API_KEY = "SAMPLE_KEY"
