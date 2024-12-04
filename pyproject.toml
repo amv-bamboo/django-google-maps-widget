@@ -1,6 +1,6 @@
 [project]
 name = "django-google-maps-widget"
-version = "1.0.0"
+version = "1.0.1"
 authors = [
   { name="Aaron Madison", email="aaron.l.madison@gmail.com" },
   { name="Andrei Mukamolau", email="amv@bamboogroup.eu" },

@@ -1,4 +1,4 @@
-## [1.0.0] - TBD
+## [1.0.0] - 03.12.2024
 
 - Initial release of the new library
 
