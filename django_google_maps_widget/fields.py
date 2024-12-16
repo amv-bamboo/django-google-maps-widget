@@ -56,7 +56,7 @@ class GeoPt(object):
 
     def __str__(self):
         if self.lat is not None and self.lon is not None:
-            return "%s,%s" % (self.lat, self.lon)
+            return f"{self.lat},{self.lon}"
         return ""
 
     def __eq__(self, other):
@@ -72,17 +72,17 @@ class GeoPt(object):
             lat, lon = geo_point.split(",")
             return lat, lon
         except (AttributeError, ValueError):
-            m = 'Expected a "lat,long" formatted string; received %s (a %s).'
-            raise exceptions.ValidationError(m % (geo_point, typename(geo_point)))
+            raise exceptions.ValidationError(
+                f'Expected a "lat,long" formatted string; received {geo_point} (a {typename(geo_point)}).'
+            )
 
     def _validate_geo_range(self, geo_part, range_val):
         try:
             geo_part = float(geo_part)
             if abs(geo_part) > range_val:
-                m = "Must be between -%s and %s; received %s"
-                raise exceptions.ValidationError(m % (range_val, range_val, geo_part))
+                raise exceptions.ValidationError(f"Must be between -{range_val} and {range_val}; received {geo_part}")
         except (TypeError, ValueError):
-            raise exceptions.ValidationError("Expected float, received %s (a %s)." % (geo_part, typename(geo_part)))
+            raise exceptions.ValidationError(f"Expected float, received {geo_part} (a {typename(geo_part)}).")
         return geo_part
 
 
