@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+from typing import Any, Optional
 from django.core import exceptions
 from django.db import models
 from django.utils.encoding import force_str
@@ -23,7 +24,7 @@ from django.utils.encoding import force_str
 __all__ = ("AddressField", "GeoLocationField")
 
 
-def typename(obj):
+def typename(obj) -> str:
     """Returns the type of obj as a string. More descriptive and specific than
     type(obj), and safe for any object, unlike __class__."""
     if hasattr(obj, "__class__"):
@@ -35,10 +36,10 @@ def typename(obj):
 class GeoPt(object):
     """A geographical point."""
 
-    lat = None
-    lon = None
+    lat: Optional[float] = None
+    lon: Optional[float] = None
 
-    def __init__(self, lat, lon=None):
+    def __init__(self, lat: str, lon: Optional[str] = None):
         """
         If the model field has 'blank=True' or 'null=True' then
         we can't always expect the GeoPt to be instantiated with
@@ -54,19 +55,21 @@ class GeoPt(object):
         self.lat = self._validate_geo_range(lat, 90)
         self.lon = self._validate_geo_range(lon, 180)
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.lat is not None and self.lon is not None:
             return f"{self.lat},{self.lon}"
         return ""
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         if isinstance(other, GeoPt):
             return bool(self.lat == other.lat and self.lon == other.lon)
 
-    def __len__(self):
+        return False
+
+    def __len__(self) -> int:
         return len(force_str(self))
 
-    def _split_geo_point(self, geo_point):
+    def _split_geo_point(self, geo_point: str) -> tuple[str, str]:
         """splits the geo point into lat and lon"""
         try:
             lat, lon = geo_point.split(",")
@@ -76,14 +79,14 @@ class GeoPt(object):
                 f'Expected a "lat,long" formatted string; received {geo_point} (a {typename(geo_point)}).'
             )
 
-    def _validate_geo_range(self, geo_part, range_val):
+    def _validate_geo_range(self, geo_part: str, range_val: float) -> float:
         try:
-            geo_part = float(geo_part)
-            if abs(geo_part) > range_val:
+            converted_geo_part = float(geo_part)
+            if abs(converted_geo_part) > range_val:
                 raise exceptions.ValidationError(f"Must be between -{range_val} and {range_val}; received {geo_part}")
         except (TypeError, ValueError):
             raise exceptions.ValidationError(f"Expected float, received {geo_part} (a {typename(geo_part)}).")
-        return geo_part
+        return converted_geo_part
 
 
 class AddressField(models.CharField):
