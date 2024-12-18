@@ -113,20 +113,20 @@ class GeoLocationField(models.CharField):
         kwargs["max_length"] = 100
         super(GeoLocationField, self).__init__(*args, **kwargs)
 
-    def from_db_value(self, value, *args, **kwargs):
+    def from_db_value(self, value: Any, *args, **kwargs) -> GeoPt:
         return self.to_python(value)
 
-    def to_python(self, value):
+    def to_python(self, value: Any) -> GeoPt:
         if isinstance(value, GeoPt):
             return value
         return GeoPt(value)
 
-    def get_prep_value(self, value):
+    def get_prep_value(self, value: Optional[Any]) -> Optional[str]:
         """prepare the value for database query"""
         if value is None:
             return None
         return force_str(self.to_python(value))
 
-    def value_to_string(self, obj):
+    def value_to_string(self, obj) -> Optional[str]:
         value = self.value_from_object(obj)
         return self.get_prep_value(value)
