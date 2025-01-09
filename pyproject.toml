@@ -44,6 +44,8 @@ dependencies = [
     "ruff",
     "coverage",
     "mock",
+    "mypy",
+    "django-stubs"
 ]
 
 [[tool.hatch.envs.test.matrix]]
@@ -60,6 +62,7 @@ matrix.django.dependencies = [
 [tool.hatch.envs.test.scripts]
 test = "python manage.py test"
 lint = "ruff check"
+types = "mypy -m django_google_maps_widget.fields"
 test-cov = "coverage run --source=django_google_maps_widget manage.py test"
 cov-report = "coverage report --show-missing"
 cov = ["test-cov", "cov-report"]

@@ -127,6 +127,9 @@ class GeoLocationField(models.CharField):
             return None
         return force_str(self.to_python(value))
 
-    def value_to_string(self, obj) -> Optional[str]:
+    def value_to_string(self, obj) -> str:
         value = self.value_from_object(obj)
-        return self.get_prep_value(value)
+        prepped_value = self.get_prep_value(value)
+        if prepped_value is None:
+            return ""
+        return prepped_value
