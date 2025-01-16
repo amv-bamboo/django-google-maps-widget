@@ -27,7 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install hatch
       - name: Run Lint
-        run: hatch run test.py3.13-5.1.4:lint
+        run: hatch run test.py3.13-5.1.5:lint
 
   test:
     runs-on: ubuntu-latest
@@ -74,4 +74,4 @@ jobs:
           pip install hatch
       - name: Run Tests
         run: |
-          hatch run test.py3.13-5.1.4:cov
+          hatch run test.py3.13-5.1.5:cov
