@@ -50,13 +50,13 @@ dependencies = [
 
 [[tool.hatch.envs.test.matrix]]
 python = ["3.11", "3.12", "3.13"]
-django = ["4.2.17", "5.0.10", "5.1.4"]
+django = ["4.2.18", "5.0.11", "5.1.5"]
 
 [tool.hatch.envs.test.overrides]
 matrix.django.dependencies = [
-    { value = "Django==4.2.17", if = ["4.2.17"] },
-    { value = "Django==5.0.10", if = ["5.0.10"] },
-    { value = "Django==5.1.4", if = ["5.1.4"] }
+    { value = "Django==4.2.18", if = ["4.2.19"] },
+    { value = "Django==5.0.11", if = ["5.0.11"] },
+    { value = "Django==5.1.5", if = ["5.1.5"] }
 ]
 
 [tool.hatch.envs.test.scripts]
