@@ -15,8 +15,8 @@ classifiers = [
   "Environment :: Web Environment",
   "Framework :: Django",
   "Framework :: Django :: 4.2",
-  "Framework :: Django :: 5.0",
   "Framework :: Django :: 5.1",
+  "Framework :: Django :: 5.2",
   "Intended Audience :: Developers",
   "License :: OSI Approved :: BSD License",
   "Operating System :: OS Independent",
@@ -40,18 +40,18 @@ dependencies = ["ruff", "coverage", "mock", "mypy", "django-stubs"]
 
 [[tool.hatch.envs.test.matrix]]
 python = ["3.11", "3.12", "3.13"]
-django = ["4.2.20", "5.0.13", "5.1.7"]
+django = ["4.2.20", "5.1.8", "5.2"]
 
 [tool.hatch.envs.test.overrides]
 matrix.django.dependencies = [
   { value = "Django==4.2.20", if = [
     "4.2.20",
   ] },
-  { value = "Django==5.0.13", if = [
-    "5.0.13",
+  { value = "Django==5.1.8", if = [
+    "5.1.8",
   ] },
-  { value = "Django==5.1.7", if = [
-    "5.1.7",
+  { value = "Django==5.2", if = [
+    "5.2",
   ] },
 ]
 
