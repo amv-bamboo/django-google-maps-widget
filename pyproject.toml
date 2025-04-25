@@ -40,15 +40,15 @@ dependencies = ["ruff", "coverage", "mock", "mypy", "django-stubs"]
 
 [[tool.hatch.envs.test.matrix]]
 python = ["3.11", "3.12", "3.13"]
-django = ["4.2.20", "5.1.8", "5.2"]
+django = ["4.2", "5.1", "5.2"]
 
 [tool.hatch.envs.test.overrides]
 matrix.django.dependencies = [
   { value = "Django==4.2.20", if = [
-    "4.2.20",
+    "4.2",
   ] },
   { value = "Django==5.1.8", if = [
-    "5.1.8",
+    "5.1",
   ] },
   { value = "Django==5.2", if = [
     "5.2",
