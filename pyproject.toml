@@ -50,7 +50,7 @@ matrix.django.dependencies = [
   { value = "Django==5.1.11", if = [
     "5.1",
   ] },
-  { value = "Django==5.2.3", if = [
+  { value = "Django==5.2.4", if = [
     "5.2",
   ] },
 ]
