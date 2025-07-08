@@ -24,7 +24,7 @@ from django.utils.encoding import force_str
 __all__ = ("AddressField", "GeoLocationField")
 
 
-def typename(obj) -> str:
+def typename(obj: Any) -> str:
     """Returns the type of obj as a string. More descriptive and specific than
     type(obj), and safe for any object, unlike __class__."""
     if hasattr(obj, "__class__"):
@@ -65,6 +65,9 @@ class GeoPt(object):
             return bool(self.lat == other.lat and self.lon == other.lon)
 
         return False
+
+    def __iter__(self):
+        return GeoPtIterator(self)
 
     def __len__(self) -> int:
         return len(force_str(self))
@@ -133,3 +136,17 @@ class GeoLocationField(models.CharField):
         if prepped_value is None:
             return ""
         return prepped_value
+
+
+class GeoPtIterator:
+    def __init__(self, geopoint: GeoPt) -> None:
+        self.geopoint = geopoint
+        self.current: Optional[float] = None
+
+    def __next__(self) -> Optional[float]:
+        if self.current is None:
+            return self.geopoint.lat
+        elif self.current == self.geopoint.lat:
+            return self.geopoint.lon
+        elif self.current == self.geopoint.lon:
+            raise StopIteration
