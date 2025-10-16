@@ -14,7 +14,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: 3.13
+          python-version: 3.14
       - name: Set up pip cache
         uses: actions/cache@v4
         with:
@@ -24,7 +24,7 @@ jobs:
       - name: Install Hatch
         uses: pypa/hatch@install
       - name: Run Lint
-        run: hatch run test.py3.13-5.2:lint
+        run: hatch run test.py3.14-5.2:lint
 
   test:
     runs-on: ubuntu-latest
@@ -34,9 +34,9 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: |
-            3.11
             3.12
             3.13
+            3.14
           cache: pip
       - name: Set up pip cache
         uses: actions/cache@v4
@@ -57,7 +57,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: 3.13
+          python-version: 3.14
       - name: Set up pip cache
         uses: actions/cache@v4
         with:
@@ -68,4 +68,4 @@ jobs:
         uses: pypa/hatch@install
       - name: Run Tests
         run: |
-          hatch run test.py3.13-5.2:cov
+          hatch run test.py3.14-5.2:cov

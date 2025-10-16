@@ -1,6 +1,6 @@
 [project]
 name = "django-google-maps-widget"
-version = "1.0.1"
+version = "2.0.0"
 authors = [
   { name = "Aaron Madison", email = "aaron.l.madison@gmail.com" },
   { name = "Andrei Mukamolau", email = "amv@bamboogroup.eu" },
@@ -8,7 +8,7 @@ authors = [
 maintainers = [{ name = "Andrei Mukamolau", email = "amv@bamboogroup.eu" }]
 description = "Plugs Google Maps Platform API into Django admin."
 readme = "README.rst"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = ["Django>=4.2"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
@@ -21,11 +21,11 @@ classifiers = [
   "License :: OSI Approved :: BSD License",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Software Development",
   "Topic :: Software Development :: Libraries :: Application Frameworks",
 ]
@@ -44,7 +44,7 @@ installer = "uv"
 dependencies = ["ruff", "coverage", "mock", "mypy", "django-stubs"]
 
 [[tool.hatch.envs.test.matrix]]
-python = ["3.11", "3.12", "3.13"]
+python = ["3.12", "3.13", "3.14"]
 django = ["4.2", "5.1", "5.2"]
 
 [tool.hatch.envs.test.overrides]
