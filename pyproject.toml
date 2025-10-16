@@ -35,7 +35,12 @@ license = { file = "LICENSE" }
 Homepage = "https://github.com/amv-bamboo/django-google-maps-widget"
 Issues = "https://github.com/amv-bamboo/django-google-maps-widget/issues"
 
+[tool.hatch.envs.default]
+installer = "uv"
+path = ".venv"
+
 [tool.hatch.envs.test]
+installer = "uv"
 dependencies = ["ruff", "coverage", "mock", "mypy", "django-stubs"]
 
 [[tool.hatch.envs.test.matrix]]
@@ -44,13 +49,13 @@ django = ["4.2", "5.1", "5.2"]
 
 [tool.hatch.envs.test.overrides]
 matrix.django.dependencies = [
-  { value = "Django==4.2.24", if = [
+  { value = "Django==4.2.25", if = [
     "4.2",
   ] },
-  { value = "Django==5.1.12", if = [
+  { value = "Django==5.1.13", if = [
     "5.1",
   ] },
-  { value = "Django==5.2.6", if = [
+  { value = "Django==5.2.7", if = [
     "5.2",
   ] },
 ]

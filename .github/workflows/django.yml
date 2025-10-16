@@ -22,7 +22,7 @@ jobs:
           key: ${{ runner.os }}-lint-pip-${{ hashFiles('pyproject.toml') }}
           restore-keys: ${{ runner.os }}-lint-pip-
       - name: Install Hatch
-        run: pipx install hatch
+        uses: pypa/hatch@install
       - name: Run Lint
         run: hatch run test.py3.13-5.2:lint
 
@@ -45,7 +45,7 @@ jobs:
           key: ${{ runner.os }}-test-pip-${{ hashFiles('pyproject.toml') }}
           restore-keys: ${{ runner.os }}-test-pip-
       - name: Install Hatch
-        run: pipx install hatch
+        uses: pypa/hatch@install
       - name: Run Tests
         run: |
           hatch run -p test:test
@@ -65,7 +65,7 @@ jobs:
           key: ${{ runner.os }}-cov-pip-${{ hashFiles('pyproject.toml') }}
           restore-keys: ${{ runner.os }}-cov-pip-
       - name: Install Hatch
-        run: pipx install hatch
+        uses: pypa/hatch@install
       - name: Run Tests
         run: |
           hatch run test.py3.13-5.2:cov
