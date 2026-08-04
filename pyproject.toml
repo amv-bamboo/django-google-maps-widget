@@ -48,10 +48,10 @@ django = ["5.2", "6.0"]
 
 [tool.hatch.envs.test.overrides]
 matrix.django.dependencies = [
-  { value = "Django==5.2.14", if = [
+  { value = "Django==5.2.16", if = [
     "5.2",
   ] },
-  { value = "Django==6.0.6", if = [
+  { value = "Django==6.0.7", if = [
     "6.0",
   ] },
 ]
